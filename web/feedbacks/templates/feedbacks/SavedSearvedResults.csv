@@ -1,0 +1,2 @@
+{% for sample in mobile_list %}{{ sample.id }},{{ sample.msisdn }},{{sample.name}}
+{% endfor %}

@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+{% block title %}PO UPC count chart{% endblock %}
+
+{% block content %}
+
+{% if chart %}
+
+        <img src="data:image/png;base64, {{ chart | safe }}">
+    {% else %}
+    <p><h3><center>PO UPC generated between {{ upc_start_dt }} and {{ upc_end_dt }}</center></h3></p>
+    <br>
+    <p> <h4 style="color: green"> <center>
+        ****************************************************************************<BR>
+        No data found for the selected range of Portout UPC generation dates.<BR>
+        ****************************************************************************
+    
+    
+    </center></h4></p>
+        
+
+    {% endif %}
+{% endblock %}

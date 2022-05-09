@@ -1,0 +1,113 @@
+{% extends "base_generic.html" %}
+
+
+{% block title %}
+  MNP PO UPC details
+{% endblock %}
+
+{% block head %}
+  <script type="text/javascript">
+    function refresh()
+    {
+      location.reload();
+    }
+  </script>
+  
+{% endblock %}
+
+{% block content %}
+
+    
+  {% if mobile_list %}
+    {% if mobile_list.0.reason_for_PO == '' or mobile_list.0.reason_for_PO == 'Not Answered' %}
+      <center><h3 class="p3">Feedback pending for following MSISDNs:</h3></center>
+      {% else %}
+    <center><h3 class="p3">Feedback completed for following MSISDNs:</h3></center>
+    {% endif %}
+  <input class= "refresh" type="button" value="Refresh Page" onclick="refresh()">     
+  <br>
+  <br>
+  <table class="blueTable">
+    <thead>
+      <tr>        
+        <th scope="col">MSISDN</th>
+        <th scope="col">NAME</th>        
+        <th scope="col">SSA</th>
+        <th scope="col">CIRCLE</th>
+        <th scope="col">UPC DATE</th>
+        <th scope="col">CONNECTION TYPE</th>
+        <th scope="col">AVERAGE REVENUE</th>
+        <th scope="col">REASON OF PORTOUT</th>
+        <th scope="col">FEEDBACK DATE</th>
+        <th scope="col">PO APPLIED DATE</th>
+        <th scope="col">PORTED DATE</th>
+        <th scope="col">PORT STATUS</th>        
+      </tr>
+    </thead>
+    
+    <tbody>
+        
+      {% for mobile in mobile_list %}
+      {% if mobile_list.0.reason_for_PO == '' or mobile_list.0.reason_for_PO == 'Not Answered'%}
+        
+        {% if i > 5 %}
+    <tr class="blueTableRow p3">
+      <td>  <a href="{{ mobile.get_absolute_url }}" target="_blank">A{{ mobile.msisdn }}</a> </td>
+      <td class="p3">{{mobile.name}} </td>      
+      <td> {{ mobile.ssa}} </td>
+      <td class="p3" > {{ mobile.circle}} </td> 
+      <td class="date ">{{ mobile.upc_date }} </td>
+      <td class="p3">{{mobile.connection_type}} </td>      
+      <td> {{ mobile.avg_revenue}} </td>
+      <td class="p3"> {{ mobile.reason_for_PO}} </td>
+      <td class="date">{{ mobile.feedback_date }} </td> 
+      <td class="date">{{ mobile.portout_apply_date }} </td>
+      <td class="date">{{ mobile.portout_date }} </td> 
+      <td class="p3"> {{ mobile.port_status}} </td> 
+      
+    </tr>
+    {% else %}
+    <tr class="blueTableRow p3">
+      
+      <td>  <a href="{{ mobile.get_absolute_url }}" target="_blank">{{ mobile.msisdn }}</a> </td>
+      <td class="p3">{{mobile.name}} </td>      
+      <td> {{ mobile.ssa}} </td>
+      <td class="p3" > {{ mobile.circle}} </td> 
+      <td class="date ">{{ mobile.upc_date }} </td>
+      <td class="p3">{{mobile.connection_type}} </td>      
+      <td> {{ mobile.avg_revenue}} </td>
+      <td class="p3"> {{ mobile.reason_for_PO}} </td>
+      <td class="date">{{ mobile.feedback_date }} </td> 
+      <td class="date">{{ mobile.portout_apply_date }} </td>
+      <td class="date">{{ mobile.portout_date }} </td> 
+      <td class="p3"> {{ mobile.port_status}} </td> 
+    </tr>
+    {% endif %} 
+
+    {% else %}
+    <tr class="blueTableRow p1">
+      
+      <td>{{ mobile.msisdn }}</td>
+      <td class="p3">{{mobile.name}} </td>      
+      <td> {{ mobile.ssa}} </td>
+      <td class="p3" > {{ mobile.circle}} </td> 
+      <td class="date ">{{ mobile.upc_date }} </td>
+      <td class="p3">{{mobile.connection_type}} </td>      
+      <td> {{ mobile.avg_revenue}} </td>
+      <td class="p3"> {{ mobile.reason_for_PO}} </td>
+      <td class="date">{{ mobile.feedback_date }} </td> 
+      <td class="date">{{ mobile.portout_apply_date }} </td>
+      <td class="date">{{ mobile.portout_date }} </td> 
+      <td class="p3"> {{ mobile.port_status}} </td>   
+    </tr>
+    {% endif %}
+    {% endfor %}
+    
+    </tbody>
+    
+  </table>    
+  {% else %}
+    <h3><font color='red'>No Data available for selected options.</font></h3>
+  {% endif %} 
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+{% block title %}<title>MNP feedback portal - Pandas</title>{% endblock %}
+{% block content %}
+<table><tr><td>
+<font color="blue">
+    <div id="my_table"> {{ df | safe }} </div> 
+</font>
+</td>
+</tr>
+<tr>
+<td>
+<font color="teal">
+    <div id="my_table"> {{ df2 | safe }} </div> 
+</font>
+</td>
+</tr>
+</table>
+
+
+
+{% endblock %}

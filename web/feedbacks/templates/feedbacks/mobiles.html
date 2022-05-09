@@ -1,0 +1,41 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<h2>FILTER ON UPC_DATE, MSISN, NAME</h2>
+<form method="get" action="." id="id_query_form">
+    
+    <div class="row">
+      <div class="col-md-2">{{ form.upc_date }}</div>
+      <div class="col-md-4">{{ form.keywords }}</div>
+    </div>
+    </form>
+
+<form action="{% url 'show' %}">
+    <table style="width:60%">
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+    <td><input
+      type="submit"
+      class="btn btn-success"
+      form="id_query_form"
+      formaction="{% url 'show' %}"
+      value="Show"
+    />
+    </td><td><input
+      type="submit"
+      class="btn btn-info"
+      form="id_query_form"
+      formaction="{% url 'csv' %}"
+      value="Download CSV"
+    /></td><td><input
+      type="submit"
+      class="btn btn-default"
+      form="id_query_form"
+      formaction="{% url 'xls' %}"
+      value="Export XLS"
+    /></td></tr>
+    </table>
+  </form>
+  
+  
+
+    {% endblock %}

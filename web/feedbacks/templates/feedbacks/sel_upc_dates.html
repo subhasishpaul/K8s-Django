@@ -1,0 +1,63 @@
+{% extends "base_generic.html" %}
+{% block title %}<title>MNP feedback portal - Search by UPC date range</title>{% endblock %}
+
+<script>
+  // alert("Please select date range w.r.t Port-out UPC generation");
+  
+  
+  function getDate() {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //As January is 0.
+  var yyyy = today.getFullYear();
+  
+  if(dd<10) {
+        dd = '0'+dd
+    } 
+  
+    if(mm<10) {
+        mm = '0'+mm
+    } 
+  
+    today = yyyy + '/' + mm + '/' + dd;
+    console.log(today);
+    document.getElementById("d1").value = today;
+    document.getElementById("d2").value = today;
+  }
+  </script>
+
+
+{% block content %}
+
+<p> <h2 style="color: green">Search using UPC generation date:</h2></p>
+  <form action="{% url 'search_results' %}" method="get">
+    <table style="width:20%">
+    <tr><td style="color:#0000ff">UPC start date:&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="date" class="form-control" id="d1" name="d1" required> 
+    </td></tr>
+    <tr><td style="width:5%">  </td></tr>
+    <tr><td style="color:#0000ff">UPC end date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="date" class="form-control" id="d2" name="d2" required>
+    </td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+    <tr>
+      <td>
+          
+        <button type="submit" class="button1" >Search</button>
+      </td>
+      <td>
+        <button type="reset" class="btn btn-warning" id="id_clear_filters" onclick="return resetForm(this.form);">
+          Clear Filters
+        </button>
+      </td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      <td><button type="submit" class="export" formaction="{% url 'export_csv_upc_range' %}" >
+        Export CSV</button>
+      </td>       
+    </tr>
+  </table>   
+     
+    
+  </form>
+
+  {% endblock %}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNP Feedback portal</title>
+</head>
+<body>
+   
+
+{% include 'feedbacks/includes/messages.html' %}
+
+
+{% if mobile %}
+<font color='red'>
+<center>
+<H1> Feedback already taken for {{ mobile.msisdn }} on {{ mobile.feedback_date }}</H1> 
+<H3>You may close this window.</H3>
+
+</center>
+</font>
+{% endif %}
+ 
+</body>
+</html>

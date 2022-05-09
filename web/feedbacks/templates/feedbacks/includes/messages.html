@@ -1,0 +1,24 @@
+<!-- {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %} -->
+
+{% for message in messages %}
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+    {{ message }}
+  </div>
+{% endfor %}
+
+
+<script>
+  function quitBox(cmd) {   
+    if (cmd=='quit') {
+        open(location, '_self').close();
+    }   
+    return false;   
+}
+
+</script>

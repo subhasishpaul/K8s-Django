@@ -1,0 +1,61 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% include 'feedbacks/includes/messages.html' %}
+
+<div class="form-group">
+<font color = "blue">
+Customer feedback form for {% render_field mobile.msisdn %}
+  <center> <h1 class="bg-primary text-white">Customer feedback update form</h1></center>
+  <h2 class="bg-primary text-white">MSISDN: {{ mobile.msisdn }}</h2>
+
+  <p><strong>Name:</strong> {{ mobile.name }}</p>
+  <p><strong>Address:</strong> {{ mobile.address }}</p>
+  <p><strong>SSA:</strong> {{ mobile.ssa }}</p> 
+  <p><strong>Circle:</strong> {{ mobile.circle }}</p>  
+  <p><strong>UPC generated on:</strong> {{ mobile.upc_date }}</p>  
+  <p><strong>USER:</strong> {{ mobile.user }}</p> 
+
+  {% if mobile1 %}
+  {% for item in mobile1 %}
+  <p><strong>REMARKS:</strong> {{ mobile1.remarks }}</p> 
+  {% endfor %}
+  {% endif %}
+
+  <form class="form-inline" method='POST' action="" enctype='multipart/form-data' >
+    {% csrf_token %} 
+
+    <!-- {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %} -->
+
+    <table id="abc" class="table table-info table-striped" >
+      <tr>
+        <td style="width:18%">
+          
+          Reason for Portout:
+          <span class="label label-default"> {{ form.reason_for_PO }} 
+          </span>
+        </td>
+        <td>&emsp;</td>
+        <td style="width:80%">
+          
+            Remarks: 
+            <span class="label label-default"> {{ form.remarks }} 
+          </span>
+        </td>
+      </tr>
+    </table>
+  
+    <input type='submit' value='Update Feedback' />
+  </font>
+</form>
+</div>
+
+
+{% endblock %}

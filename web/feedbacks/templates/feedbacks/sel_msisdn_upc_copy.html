@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+{% block title %}<title>MNP feedback portal - Search by MSISDN/ UPC_DATE</title>{% endblock %}
+{% block content %}
+
+<p> <h2 style="color: green">Search:</h2></p>
+  <form action="{% url 'search_results2' %}" method="get" >
+    <table style="width:50%">
+      <tr>
+        <td style="color:#0000ff">MSISDN/ UPC_DATE:&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text"  class="text" name="q" placeholder="Date format: 2020-10-16"> 
+        </td>
+        <td>
+          <input type="submit" class="btn btn-primary" value="Search">
+        </td>
+        <td>
+          <button type="reset" class="btn btn-warning" id="id_clear_filters" onclick="return resetForm(this.form);">
+            Clear Filters
+          </button>
+        </td>
+        <td>
+          <input type="submit" class="btn btn-info" formaction="{% url 'csv' %}" value="Export CSV"/>
+        </td>
+      </tr>
+    </table>    
+    
+  </form>
+
+  {% endblock %}

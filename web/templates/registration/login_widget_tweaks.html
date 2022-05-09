@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% load widget_tweaks %} 
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" crossorigin="anonymous">
+
+{% block content %}
+
+<div class="form-group"> 
+   // username is the default name of username in django forms 
+  {% render_field form.username type="text" class="form-control" id="exampleInputUsername" placeholder="Username" %} 
+</div> 
+  
+<div class="form-group"> 
+   // password1 is the default name of password in django forms 
+  {% render_field form.password type="password" class="form-control" id="exampleInputPassword" placeholder="Password" %} 
+</div> 
+  
+
+<div> 
+  <button type="submit" value="Submit" > Register </button> 
+</div>
+
+{% endblock %}

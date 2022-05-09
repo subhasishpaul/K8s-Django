@@ -1,0 +1,152 @@
+{% load widget_tweaks %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MNP Feedback form</title> 
+
+<link rel="stylesheet" href="{% static 'css/bulma.min.css' %}" crossorigin="anonymous"> 
+
+<script defer src="{% static 'jquery/js/fontawesome.all.js' %}">
+</script>
+</head>
+
+<body>
+{% include 'feedbacks/includes/messages.html' %}
+
+<section class="section">
+<center> <h1><B><font color="green">
+Customer feedback form for {% render_field mobile.msisdn %} </font></B></h1></center>
+<center> <h4><font color="black">
+You are logged in as {% render_field mobile.user %} </font></h4></center>
+  <hr>  
+
+<nav class="level">
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Name</p>
+      <p class="title">{% render_field mobile.name %}</p>
+    </div>
+  </div>
+</nav>
+<nav class="level">
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Address</p>
+      <p class="title">{% render_field mobile.address %}</p>
+    </div>
+  </div>
+</nav>
+<nav class="level">
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Circle</p>
+      <p class="title">{% render_field mobile.circle %}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">SSA</p>
+      <p class="title">{% render_field mobile.ssa %}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">UPC generated on</p>
+      <p class="title">{% render_field mobile.upc_date %}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">UPC expiry date</p>
+      <p class="title">{% render_field mobile.upc_expiry_date %}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Average revenue</p>
+      <p class="title">{% render_field mobile.avg_revenue %}</p>
+    </div>
+  </div>
+</nav>
+
+<nav class="level">
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Connection type</p>
+      <p class="title">{% render_field mobile.connection_type %}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Portout applied on</p>
+      <p class="title">{% render_field mobile.portout_apply_date %}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Portout on</p>
+      <p class="title">{% render_field mobile.portout_date %}</p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">PO status</p>
+      <p class="title">{% render_field mobile.port_status %}</p>
+    </div>
+  </div>
+  
+</nav>
+
+
+<hr>
+    <div class="container">
+      <div class="columns">
+        <div class="column is-half is-offset-one-quarter">                    
+          <form method='POST' action="" enctype='multipart/form-data'>
+            {% csrf_token %} 
+
+          <div class="field">
+            <label class="label">Reason for Portout (If customer can not be contacted, choose 'Not Answered'): </label>
+            <div class="control">
+              <div class="select">
+                {% render_field  form.reason_for_PO %}
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Remarks:</label>
+            <div class="control">
+              {% render_field form.remarks rows="2" placeholder="Enter customer specific remarks (Mandatory)" class+="textarea" %}
+            </div>
+          </div>
+
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-link" >Update Feedback</button>
+            </div>
+          </div>
+          
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  </script>
+ 
+  {% if messages %}
+  <script>
+      {% for message in messages %}
+          $(document).ready(function () {
+              $('.toast').toast('show');
+          });
+      {% endfor %}
+  
+  {% endif %} 
+</body>
+</html>

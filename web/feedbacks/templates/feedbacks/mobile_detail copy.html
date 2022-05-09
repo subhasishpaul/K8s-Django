@@ -1,0 +1,52 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="form-group">
+<font color = "blue">
+  <center> <h1 class="bg-primary text-white">Customer feedback update form</h1></center>
+  <h2 class="bg-primary text-white">MSISDN: {{ mobile.msisdn }}</h2>
+
+  <p><strong>Name:</strong> {{ mobile.name }}</p>
+  <p><strong>Address:</strong> {{ mobile.address }}</p>
+  <p><strong>SSA:</strong> {{ mobile.ssa }}</p> 
+  <p><strong>Circle:</strong> {{ mobile.circle }}</p>  
+  <p><strong>UPC generated on:</strong> {{ mobile.upc_date }}</p>  
+  <p><strong>USER:</strong> {{ mobile.user }}</p> 
+  
+  <form class="form-inline" method='POST' action="" enctype='multipart/form-data'>
+    {% csrf_token %} 
+    <table id="abc" class="table table-info table-striped" >
+      <tr>
+        <td style="width:18%">
+          
+          Reason for Portout:
+          <span class="label label-default"> {{ form.reason_for_PO }} 
+          </span>
+        </td>
+        <td>&emsp;</td>
+        <td style="width:80%">
+          
+            Remarks: 
+            <span class="label label-default"> {{ form.remarks }} 
+          </span>
+        </td>
+      </tr>
+    </table>
+  
+    <input type='submit' value='Update Feedback' />
+  </font>
+
+  &nbsp;&nbsp;&nbsp;<a href="#" onclick="return quitBox('quit');">CLOSE</a>
+</form>
+</div>
+
+<script>
+  function quitBox(cmd) {   
+    if (cmd=='quit') {
+        open(location, '_self').close();
+    }   
+    return false;   
+}
+</script>
+
+{% endblock %}

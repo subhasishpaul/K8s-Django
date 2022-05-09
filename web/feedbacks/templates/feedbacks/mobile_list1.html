@@ -1,0 +1,78 @@
+{% extends "base_generic.html" %}
+{% block title %}
+  PO MSISDN details
+{% endblock %}
+
+{% block content %}
+    
+  {% if mobile_list %}
+    <center><h3 class="p3">Feedback status for following PO UPC generated MSISDNs:</h3></center>
+      
+  <table class="blueTable p2">
+    <thead>
+      <tr>        
+        <th scope="col">MSISDN</th>
+        <th scope="col">NAME OF CUSTOMER</th>
+        <th scope="col">ADDRESS</th>
+        <th scope="col">SSA</th>
+        <th scope="col">CIRCLE</th>
+        <th scope="col">UPC DATE</th>
+        <th scope="col">PO REASON</th>
+        <th width="15%" scope="col">REMARKS</th>
+        <th class="date" scope="col">FEEDBACK DATE</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+        
+      {% for mobile in mobile_list %}
+      {% if mobile.feedback_date is NULL %}
+        
+        {% if i > 5 %}
+    <tr class="blueTableRow">
+      <td>  <a href="{{ mobile.get_absolute_url }}" target="_blank">{{ mobile.msisdn }}</a> </td>
+      <td  class="p3">{{mobile.name}} </td>
+      <td >{{ mobile.address}} </td>
+      <td  width="8%"> {{ mobile.ssa}} </td>
+      <td class="date " > {{ mobile.circle}} </td> 
+      <td class="date ">{{ mobile.upc_date }} </td>
+      <td > {{ mobile.reason_for_po}} </td>
+      <td > {{ mobile.remarks}} </td> 
+      <td class="date ">{{ mobile.feedback_date }} </td>  
+    </tr>
+    {% else %}
+    <tr class="blueTableRow">
+      <td >  <a href="{{ mobile.get_absolute_url }}" target="_blank">{{ mobile.msisdn }}</a> </td>
+      <td >{{mobile.name}} </td>
+      <td >{{ mobile.address}} </td>
+      <td  width="8%"> {{ mobile.ssa}} </td>
+      <td class="date " > {{ mobile.circle}} </td> 
+      <td class="date ">{{ mobile.upc_date }} </td>
+      <td > {{ mobile.reason_for_PO}} </td>
+      <td > {{ mobile.remarks}} </td> 
+      <td class="date ">{{ mobile.feedback_date }} </td>  
+    </tr>
+    {% endif %} 
+
+    {% else %}
+    <tr class="blueTableRow">
+      <td > <B>{{ mobile.msisdn }}</B></a> </td>
+      <td >{{mobile.name}} </td>
+      <td >{{ mobile.address}} </td>
+      <td  width="8%"> {{ mobile.ssa}} </td>
+      <td class="date " > {{ mobile.circle}} </td> 
+      <td class="date ">{{ mobile.upc_date }} </td>
+      <td > {{ mobile.reason_for_PO}} </td>
+      <td > {{ mobile.remarks}} </td> 
+      <td class="date ">{{ mobile.feedback_date }} </td>  
+    </tr>
+    {% endif %}
+    {% endfor %}
+    
+    </tbody>
+  </table>    
+  {% else %}
+    <h3><font color='red'>There are no PO UPC generated MSISDN in the database for selected options.</font></h3>
+  {% endif %} 
+  
+{% endblock %}

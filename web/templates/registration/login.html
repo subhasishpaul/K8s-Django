@@ -1,0 +1,64 @@
+{% extends "base_generic.html" %}
+{% block title %}MNP Login Page{% endblock title %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/w3.css' %}">
+
+<style>
+  body, html {
+    height: 100%;
+    font-family: "Inconsolata", sans-serif;
+  }
+  
+  </style>
+  
+   
+  
+  <!-- Add a background color and large text to the whole page -->
+  <div class="w3-sand w3-grayscale w3-large">
+  <!-- About Container -->
+  <div class="w3-container" id="about">
+    <div class="w3-content" style="max-width:800px">
+      <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Welcome to East Zone MNP feedback portal</span></h5>
+      <p>This portal provides details of East Zone GSM customer who have generated Port-Out UPC. BSNL concerned of East Zone circles and Call center can take feedback from these customers and then update the same in this portal.</p>
+            
+    </div>
+  </div>
+  <br>
+  
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+  
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to access this portal.</p>
+    {% endif %}
+  {% endif %}
+  
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <table>
+      <tr>
+        <td>{{ form.username.label_tag }}</td>
+        <td>{{ form.username }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.password.label_tag }}</td>
+        <td>{{ form.password }}</td>
+      </tr>
+    </table><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="submit" class="refresh" value="Login" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+  
+  <!-- {# Assumes you setup the password_reset view in your URLconf #}
+  <p><a href="{% url 'password_reset' %}">Lost password?</a></p> -->
+  <h6>In case of any issue, please mail at help.billing@gmail.com</h6>
+  
+{% endblock %}

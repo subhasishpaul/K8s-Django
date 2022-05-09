@@ -1,0 +1,16 @@
+{% extends 'base_generic.html' %}
+{% block title %}Details by SSA{% endblock %}
+
+
+{% block content %}
+<table>
+  {% for key, value in data_dict.items %}
+      <tr>
+          <td>{{ key }}</td>
+          <td>{{ value }}</td>
+          
+      </tr>
+  {% endfor %}
+  </table>
+
+{% endblock %}

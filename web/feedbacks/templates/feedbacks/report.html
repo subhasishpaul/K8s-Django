@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+{% block title %}
+  Feedback report
+{% endblock %}
+
+{% block content %}
+<h3>{{ title }} between {{ upc_start_dt }} and {{ upc_end_dt }}:</h3>
+
+{{ data2 | safe }}
+{% endblock %}

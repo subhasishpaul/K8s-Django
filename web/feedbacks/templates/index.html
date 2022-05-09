@@ -1,0 +1,67 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/w3.css' %}">
+
+<style>
+  body, html {
+    height: 100%;
+    font-family: "Segoe UI", "Inconsolata", sans-serif;
+  }
+  
+  /* Not used */
+  
+  .bgimg {
+    background-position: center;
+    background-size: cover;
+    background-image: url("{% static 'images/mnp.jpg' %}");
+    min-height: 75%;
+  }
+  
+  .menu {
+    display: none;
+  }
+  </style>
+  <body>
+  
+  
+  
+  <!-- Add a background color and large text to the whole page -->
+  <div class="w3-sand w3-grayscale w3-medium">
+  
+  <!-- About Container -->
+  <div class="w3-container" id="about">
+    <div class="w3-content" style="max-width:800px">
+      <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Welcome to East Zone MNP feedback portal</span></h5>
+      <p>This portal provides details of East Zone GSM customer who have generated Port-Out UPC. BSNL concerned of East Zone circles and Call center can take feedback from these customers and then update the same in this portal.</p>
+      <p>Following information are available in this portal:-</p>
+      <div class="w3-panel w3-leftbar w3-light-grey">
+        <p><i><strong>UPC report:</strong> Count of PO UPC MSISDNs can be generated in report and can be plotted also - Circle-wise and SSA-wise for the range of selected PO UPC dates.</i></p>
+        <p><i><strong>Feedback report:</strong> Count of Feedback completed and pending can be generated in report and can be plotted also - Circle-wise and SSA-wise for the range of selected PO UPC dates. Reason of port-out reason as informed by PO UPC generated customers can be checked and can be plotted too.</i></p>
+        <p>Details of MSISDNs can be checked and Feedback can be updated from customers through the options under <strong>'Update Feedback':-</strong></p>
+        <p><i><strong>By Circle:</strong> Circle-wise details can be checked and updated.</i></p>
+        <p><i><strong>By SSA:</strong> SSA-wise details can be checked and updated.</i></p>
+        <p><i><strong>By MSISDN:</strong> Particular MSISDN can also be checked and updated.</i></p>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <br>
+  <!-- Contact/Area Container -->
+  <div class="w3-container" id="where" style="padding-bottom 8px;">
+    <div class="w3-content" style="max-width:420px">
+     
+      <h7 class="w3-center w3-padding-12"><span class="w3-tag w3-narrow">Please open this site in Google Chrome or Microsoft Edge for best results.</span></h7>
+
+      <br>
+      <p>For any issue, mail at <a href="mailto:help.billing@gmail.com">help.billing@gmail.com</a></p>      
+    </div>
+  </div>
+  
+  <!-- End page content -->
+  </div>
+  
+{% endblock %}

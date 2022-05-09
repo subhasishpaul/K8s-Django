@@ -1,0 +1,24 @@
+{% extends 'base_generic.html' %}
+{% block title %}Details by SSA{% endblock %}
+
+
+{% block content %}
+<h3>{{ title }} between {{ upc_start_dt }} and {{ upc_end_dt }}</h3>
+
+<table class="w3-table w3-table-all">
+    <thead>
+      <tr>        
+        <th scope="col">CIRCLE/SSA</th>
+        <th scope="col">COUNT</th>
+      </tr>
+    </thead>
+  {% for key, value in data_dict.items %}
+      <tr>
+          <td>{{ key }}</td>
+          <td>{{ value }}</td>
+          
+      </tr>
+  {% endfor %}
+  </table>
+
+{% endblock %}

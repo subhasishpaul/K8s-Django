@@ -1,0 +1,77 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+  User details
+{% endblock %}
+
+
+{% block content %}
+
+<form action="{% url 'searchuser' %}" method="get">
+  <table style="width:50%">
+    <tr>
+      <td style="color:#0000ff"><B>Search User:</B>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text"  class="text" name="usr" required> 
+      </td>
+      <td>
+        <button type="submit" class="export" ><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+  </table>    
+</form>
+<br>
+{% if user_list %}
+<center><h3 class="p3">User details as on date:</h3></center>
+  
+  <table class="blueTable">
+    <thead>
+      <tr>        
+        <th scope="col">Username</th>
+        <th scope="col">First Name</th>        
+        <th scope="col">Last Name</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Creation Date</th>
+        <th scope="col">Last Login Date</th>
+        <th scope="col">User Active</th>
+                
+      </tr>
+    </thead>
+    
+    <tbody>
+        
+      {% for user in user_list %} 
+        {% if i > 5 %}
+    <tr class="blueTableRow p3">
+      <td class="p3">{{ user.username }}</a> </td>
+      <td class="p3">{{ user.first_name }}</a> </td>
+      <td class="p3">{{ user.last_name }}</a> </td>
+      <td class="p3">{{ user.email }}</a> </td>
+      <td class="p3">{{ user.date_joined }}</a> </td>
+      <td class="p3">{{ user.last_login }}</a> </td>
+      <td class="p3">{{ user.is_active }}</a> </td>
+      
+    </tr>
+    {% else %}    
+      <tr class="blueTableRow p3">
+        <td class="p3">{{ user.username }}</a> </td>
+        <td class="p3">{{ user.first_name }}</a> </td>
+        <td class="p3">{{ user.last_name }}</a> </td>
+        <td class="p3">{{ user.email }}</a> </td>
+        <td class="p3">{{ user.date_joined }}</a> </td>
+        <td class="p3">{{ user.last_login }}</a> </td>
+        <td class="p3">{{ user.is_active }}</a> </td>
+      </tr>
+    {% endif %}
+    {% endfor %}
+    
+    </tbody>
+    
+  </table>    
+  {% else %}
+    <h3><font color='red'>No User Data found.</font></h3>
+  {% endif %} 
+
+  
+
+  {% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base_generic.html" %}
+{% block title %}
+  Feedback report
+{% endblock %}
+
+{% block content %}
+<h3>{{ title }} between {{ upc_start_dt }} and {{ upc_end_dt }}:</h3>
+
+{% if data.items %}
+<table class="blueTable" style="width:400px">
+    <thead>
+      <tr>        
+        <th scope="col">CIRCLE/ SSA</th>
+        <th scope="col">COUNT</th>
+        </tr>
+    </thead>
+    <tbody>
+
+{% for key, value in data2.items %}
+    <tr class="blueTableRow">
+            <td width=10%> {{ key }}: </td> 
+            <td width=10%> {{ value }} </td>
+        </tr>
+        
+    {% endfor %}
+    </tbody>
+    </table>
+
+    {% else %}
+    <p>No data for the selected range.</p>
+    {% endif %}
+ 
+
+{% endblock %}

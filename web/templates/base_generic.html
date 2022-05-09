@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% include 'feedbacks/includes/messages.html' %}
+  {% load static %}
+
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+  <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+  
+  <style>
+    body, html {
+      height: 100%;
+      font-family: "Calibri", "Inconsolata", sans-serif;
+    }
+
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 10px;
+      padding: 5px;
+      height: auto;
+    }
+    
+    </style>
+
+  <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
+  <script src="{% static 'jquery/js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'jquery/js/bootstrap.min.js' %}"></script>
+ 
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="{% static 'css/all.css' %}" crossorigin="anonymous">
+
+  <title>
+    {% block title %}MNP feedback portal{% endblock %}
+  </title>
+  {% block head %} {% endblock %} 
+</head>
+
+<body>
+
+  <input type="checkbox" id="check">
+  <!--header area start-->
+  <header>
+    <!-- <div style="background-image: url({% static 'images/banner2.png' %});background-repeat: no-repeat;background-position: center;" > -->
+    <!-- <img src={% static 'images/banner2.png' %} alt="Paris" class="center" height=50px></> -->
+    <!-- <div class="cover"> -->
+    <label for="check">
+      <i class="fas fa-sliders-h" id="sidebar_btn"></i>
+    </label>
+    <div class="left_area">
+      <h3>MNP Feedback <span>Portal</span></h3>
+    </div>
+    <div class="right_area">      
+      {% if user.is_authenticated %}
+        <a href="{% url 'logout'%}?next={% url 'login' %}" class="logout_btn">
+          <i class="fas fa-user"></i> {{ user.get_username }}: Logout</a> 
+          {% if user.is_superuser %}
+            <a href="{% url 'user_details'%}" class="logout_btn">
+            <i class="fas fa-user"></i>  User List</a>
+            <a href="{% url 'register'%}" class="logout_btn">
+              <i class="fas fa-user"></i>  Register new user</a> 
+          {% endif %}          
+      {% else %}
+        <a href="{% url 'login'%}?next={% url 'index' %}" class="logout_btn">
+          <i class="fas fa-user"></i> Login</a>
+      {% endif %} 
+      </a>
+    </div></div>
+  </header>
+  <!--header area end-->
+
+  {% block sidebar %}
+  <!--mobile navigation bar start-->
+  
+  <!--mobile navigation bar end-->
+
+  <!--sidebar start-->
+  <div class="sidebar">
+    <a href="{% url 'index' %}"><i class="fa fa-home fa-fw" aria-hidden="true"></i><span>Home</span></a>
+
+    {% if user.has_usable_password %}
+    <a href="{% url 'change_password' %}"><i class="fas fa-lock" aria-hidden="true"></i><span>Change password</span></a>
+    {% endif %}
+    
+    <a href="{% url 'selcircle' %}"><i class="fas fa-chart-line"></i><span>UPC report</span></a>    
+    <a href="{% url 'feedback' %}"><i class="fas fa-chart-bar"></i><span>Feedback report</span></a>
+    <br>
+    <a href="#"><font face="Calibri" color="#5C374C"><i class="fas fa-angle-double-down"></i><b><u><span style="font-size:14px font-family:'Arial narrow' color:red">Update Feedback</u>:</span></b></font></a>
+    
+    
+    <a href="{% url 'searchbycircle' %}"><i class="fas fa-play-circle" aria-hidden="true"></i><span>By Circle</span></a>
+    <a href="{% url 'searchbyssa' %}"><i class="fas fa-th" aria-hidden="true"></i><span>By SSA</span></a>
+    <a href="{% url 'searchsingle' %}"><i class="fas fa-mobile-alt" aria-hidden="true"></i><span>By MSISDN</span></a>
+    <img src="{% static 'logo.png' %} "></div>img>
+  </div>
+  <!--sidebar end-->
+  {% endblock %}
+
+  <div class="content">
+    <div class="card">
+      <p>
+        {% block content %}
+        
+        {% endblock %}      
+        
+      {% if user.is_authenticated %}
+      {% block pagination %}
+
+      {% load my_tags %}
+
+      {% if is_paginated %}
+      {% if page_obj.has_previous %}
+      <a href="?{% param_replace page=1 %}">First</a>
+      {% if page_obj.previous_page_number != 1 %} &nbsp;|&nbsp;
+      <a href="?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
+      {% endif %}
+      {% endif %}
+
+      Page {{ page_obj.number }} of {{ paginator.num_pages }}
+
+      {% if page_obj.has_next %}
+      {% if page_obj.next_page_number != paginator.num_pages %}
+      <a href="?{% param_replace page=page_obj.next_page_number %}">Next</a>
+      {% endif %}&nbsp;|&nbsp;
+      <a href="?{% param_replace page=paginator.num_pages %}">Last</a>
+      {% endif %}
+
+      &nbsp;&nbsp;&nbsp;&nbsp;Records: {{ page_obj.start_index }}&mdash;{{ page_obj.end_index }}
+      {% endif %}
+
+
+      {% endblock %}
+      {% endif %}
+      
+      </p>
+    
+    </div>
+  </div>
+
+  <div class="footer">
+    <p><span style="font-family:'Trebuchet MS';">
+      Site developed by EZBC Billing <i class="fas fa-copyright"></i>2021.&nbsp;
+    </span></p>
+  </div>  
+
+ 
+
+{% if messages %}
+  <script>
+      {% for message in messages %}
+          $(document).ready(function () {
+              $('.toast').toast('show');
+          });
+      {% endfor %}
+  </script>
+  {% endif %} 
+  
+
+</body>
+
+
+</html>

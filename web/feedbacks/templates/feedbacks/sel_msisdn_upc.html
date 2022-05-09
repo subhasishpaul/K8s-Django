@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+{% block title %}Search by MSISDN{% endblock %}
+{% block content %}
+
+<p> <h2 style="color: green">Search by MSISDN:</h2></p>
+  <form action="{% url 'search_results2' %}" method="get">
+    <table style="width:50%">
+      <tr>
+        <td style="color:#0000ff">MSISDN:&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="number"  class="number" name="q" required> 
+        </td>
+      </tr>
+      <tr><td>&nbsp;</td></tr>
+      <tr>
+        <td>
+          <button type="submit" class="export" ><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+      </tr>
+    </table>    
+    
+  </form>
+
+  {% endblock %}

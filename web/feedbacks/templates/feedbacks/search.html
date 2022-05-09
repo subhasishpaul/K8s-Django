@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>All Port-Out initiated MSISDNs</h1>
+  <p>Welcome to MNP feedback portal, a website developed by <em>EZBC Billing</em>!</p>
+  <br>>
+  <p>{{ start_date }}</p>
+  
+
+
+  
+  <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+  
+{% endblock %}

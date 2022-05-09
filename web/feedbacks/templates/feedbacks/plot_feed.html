@@ -1,0 +1,66 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+MNP Feedback report
+{% endblock %}
+
+{% block content %}
+<p> <center><h3 style="color: rgb(6, 53, 13)"><u>Customer feedback report</u></h3></center></p>
+
+<font color="brown" face="Calibri"><h4><ul>
+  <li>Select 'BSNL - Circle-wise' to get Circle-wise chart</li>
+  <li>Select particular circle to get SSA-wise chart</li>
+</h4></ul></font>
+
+<form method="get" action="{% url 'feedplot' %}" id="id_query_form">
+<B>
+    <table style="width:52%">
+      <tr><td style="color:#0000ff">Circle:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td> {{ form.circle_id }} </td>
+      </tr>
+      <tr><td><br>  </td></tr>
+      
+      <tr><td style="color:#0000ff">UPC date:</td></tr>
+      <tr><td style="color:#">From&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td><input type="date" class="form-control" id="d1" name="d1" required></td>
+          <td style="color:#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
+            <input type="date" class="form-control" id="d2" name="d2" required>
+          </td>
+      </tr>
+      <tr><td><br>  </td></tr>
+      
+      <!-- po_reason is used for capturing portout msisdn reqd purpose -->
+      <tr><td><br>  </td></tr>
+      <tr><td style="color:#0000ff">Feedback:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td style="font-size:13px;">
+          {% for radio in form.feed_status %}
+            <div class="myradio">
+            {{ radio }}
+            </div>
+          {% endfor %}
+          </td>
+      <td style="color:#0000ff">PO reason:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td style="font-size:13px;">
+          {% for radio in form.po_reason %}
+            <div class="myradio">
+            {{ radio }}
+            </div>
+          {% endfor %}
+          </td>
+      </tr>
+      <tr><td><br>  </td></tr>
+      <tr><td style="color:#0000ff">Report type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td style="font-size:13px;">
+          {% for radio in form.report_type %}
+            <div class="myradio">
+            {{ radio }}
+            </div>
+          {% endfor %}
+          </td>
+      </tr>
+    </table> 
+    <br>    
+  <input type="submit" class="export" value="SHOW" form="id_query_form" formaction="{% url 'feedplot' %}">  
+</B>
+</form>
+{% endblock %}

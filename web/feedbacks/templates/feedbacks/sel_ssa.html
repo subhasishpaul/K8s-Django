@@ -1,0 +1,96 @@
+{% extends 'base_generic.html' %}
+{% block title %}Search by SSA{% endblock %}
+
+
+{% block content %}
+
+<p> <h3 style="color: rgb(6, 53, 13)">Details of Portout UPC by SSA (Feedback can be updated after search):</h3></p>
+
+  <form method="get" action='.' id="ssaForm" data-ssas-url="{% url 'ajax_load_ssas' %}" validate>
+   <b>
+    <table style="width:25%">
+      <tr><td style="color:#0000ff">Circle:&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
+        {{ form.circle }}
+      </td></tr>
+      <tr><td><br>  </td></tr>
+      <tr><td style="color:#0000ff" >SSA:&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
+        {{ form.ssa }}
+      </td></tr>
+      <tr><td><br>  </td></tr>
+      <tr><td style="color:#0000ff">UPC date</td></tr>
+      <tr><td style="color:#">From:&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
+        <input type="date" class="form-control" id="d1" name="d1" required> 
+      </td><td style="color:#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
+        <input type="date" class="form-control" id="d2" name="d2" required>
+      </td></tr>
+
+      <tr><td><br>  </td></tr>
+      <tr><td style="color:#0000ff">Feedback:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="font-size:13px;">
+      
+      {% for radio in form.feed_sts %}
+        <div class="myradio">
+        {{ radio }}
+        </div>
+      {% endfor %}
+      </td></tr>
+
+
+      <!-- po_reason is used for capturing portout msisdn reqd purpose -->
+      <tr><td><br>  </td></tr>
+      <tr><td style="color:#0000ff">Portout status:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="font-size:13px;">
+      {% for radio in form.port_sts %}
+        <div class="myradio">
+        {{ radio }}
+        </div>
+      {% endfor %}
+      </td></tr>
+      
+    </table> 
+    <br>
+      <button type="reset" class="btn btn-warning" id="id_clear_filters" onclick="return resetForm(this.form);">
+        Reset form
+      </button>
+              
+  </b>    
+  </form>
+
+  <form action="{% url 'search_results4' %}" method="get">
+    <table style="width:50%">
+      <tr>
+        <td style="color:#0000ff">&nbsp;&nbsp;&nbsp;&nbsp;
+          
+        
+        </td></tr>
+        <tr>
+        <td>
+          
+          <button type="submit" class="export" form="ssaForm"
+          formaction="{% url 'search_results4' %}"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search</button>
+        </td>
+        <td><button type="submit" class="export" form="ssaForm" formaction="{% url 'csv_ssa_wise' %}" >
+          <i class="fas fa-download"></i>&nbsp; DOWNLOAD</button>
+        </td>        
+      </tr>
+    </table>    
+    
+  </form>
+
+  <script>
+      $("#id_circle").change(function () {
+        var url = $("#ssaForm").attr("data-ssas-url");  
+        var circleId = $(this).val();  
+  
+        $.ajax({                      
+          url: url,                    
+          data: {
+            'circle_id': circleId       
+          },
+          success: function (data) {  
+            $("#id_ssa").html(data);  
+          }
+        });
+  
+      });
+    </script>
+  
+{% endblock %}
